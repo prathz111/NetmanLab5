@@ -1,0 +1,12 @@
+{
+  "R2": {
+    "ip": "198.51.101.22",
+    "username": "prathz",
+    "password": "prathz", "secret": "netman"
+  },
+  "R3": {
+    "ip": "198.51.101.22",
+    "username": "prathz",
+    "password": "prathz", "secret": "netman"
+  }
+}
