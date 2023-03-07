@@ -98,7 +98,7 @@ def run_NMsnmp():
 
         interface_status = get_interface_status(ip_address, community)
         router_dict[ip_address] = {"addresses": {"ipv4": ipv4_addresses, "ipv6": ipv6_address}, "status": interface_status}
-
+    print("testing github diff is working or not")
     # Write the results to a file
     with open('output.txt', 'w') as f:
         json.dump(router_dict, f, indent=4)
