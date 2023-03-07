@@ -3,7 +3,7 @@ import easysnmp
 import re
 import json
 
-
+print("kkkk")
 def get_ipv4_addresses(hostname, community):
     session = easysnmp.Session(hostname=hostname, community=community, version=2)
 
