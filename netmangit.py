@@ -18,6 +18,7 @@ repo.git.commit("-m", commit_msg)
 
 # Function to compare modified files in local repository with GitHub repository
 def compare_files():
+    remote.fetch()
     # Get the list of modified files in the local repository
     modified_files = repo.git.diff("--name-only", "--diff-filter=M", "HEAD").splitlines()
 
