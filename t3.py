@@ -47,7 +47,7 @@ ip_addresses = ['198.51.101.22', '198.51.101.33', '198.51.102.1', '198.51.100.1'
 community = 'netman'
 
 output_dict = {}
-print("kkkklkkkkk")
+print("kkkkkk")
 for ip_address in ip_addresses:
     ipv6_address, index = get_ipv6_value(ip_address, community)
     if ipv6_address and index:
