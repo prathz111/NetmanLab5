@@ -1,10 +1,10 @@
 {
     "R5": {
-        "ip_address": "198.51.101.1",
+        "ipv6_global_unicast": "1111:1111::C805:47FF:FE79:8  (global unicast)",
         "device_id": "R5.colorado.edu",
         "ipv6_link_local": "FE80::C805:47FF:FE79:8  (link-local)",
+        "interface": "FastEthernet0/0",
         "platform": "Router ",
-        "ipv6_global_unicast": "1111:1111::C805:47FF:FE79:8  (global unicast)",
-        "interface": "FastEthernet0/0"
+        "ip_address": "198.51.101.1"
     }
 }
