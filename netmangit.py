@@ -1,7 +1,7 @@
 import git
 
 # Set the token secret
-token_secret = "YOUR_TOKEN_SECRET_HERE"
+token_secret = "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"
 
 # Initialize a Git repository object
 repo = git.Repo()
