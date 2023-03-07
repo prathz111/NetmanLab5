@@ -1,6 +1,6 @@
 import git
 
-def run_
+def run_NMgithub():
     # Set the GitHub repository URL
     github_repo_url = "git@github.com:prathz111/NetmanLab5.git"
 
@@ -32,3 +32,10 @@ def run_
 
     # Call the compare_and_push_changes function
     compare_and_push_changes()
+
+def main():
+    # compare_files()
+    run_NMgithub()
+
+if __name__ == "__main__":
+    main()

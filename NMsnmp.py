@@ -5,7 +5,7 @@ import json
 import time
 import matplotlib.pyplot as plt
 
-def run1():
+def run_NMsnmp():
     def get_ipv4_addresses(hostname, community):
         session = easysnmp.Session(hostname=hostname, community=community, version=2)
 
@@ -103,7 +103,14 @@ def run1():
     with open('output.txt', 'w') as f:
         json.dump(router_dict, f, indent=4)
 
-    R1 = "198.51.102.1"
+    R1_ip = "198.51.102.1"
     community = "netman"
-    fetch_cpu_utilization(R1, community)
+    fetch_cpu_utilization(R1_ip, community)
 
+
+def main():
+    # compare_files()
+    run_NMsnmp()
+
+if __name__ == "__main__":
+    main()
