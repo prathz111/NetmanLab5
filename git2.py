@@ -1,10 +1,10 @@
 import git
 
 # Set the GitHub repository URL
-github_repo_url = "https://github.com/prathz111/NetmanLab5"
+github_repo_url = "git@github.com:prathz111/NetmanLab5.git"
 
 # Initialize a Git repository object
-repo = git.Repo()
+repo = git.Repo(".")
 
 def add_and_commit_changes(commit_msg):
     # Add all files in the current directory to the staging area
@@ -13,7 +13,7 @@ def add_and_commit_changes(commit_msg):
     repo.git.commit("-m", commit_msg)
 
 def push_changes():
-    # Push the changes to the remote repository
+    # Push the changes to the remote repository using the default SSH transport mechanism
     repo.remote().push()
 
 def compare_and_push_changes():
