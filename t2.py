@@ -27,7 +27,7 @@ def get_ipv6_value(hostname, community):
     if match:
         ipv6 = match.group(1)
         return ipv6, index
-print("lll")
+print("lllll")
 
 def get_interface_name(index):
     if index == '4':
