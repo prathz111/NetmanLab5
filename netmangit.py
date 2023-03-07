@@ -1,32 +1,14 @@
+import os
 import git
 
-# Set the token secret
-token_secret = "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"
+# Set the access token
+access_token = "YOUR_ACCESS_TOKEN_HERE"
+
+# Set the Git askpass helper environment variable to avoid being prompted for a password
+os.environ["GIT_ASKPASS"] = "git_askpass_helper"
 
 # Initialize a Git repository object
 repo = git.Repo()
-
-# Function to compare modified files and print the difference
-def compare_files():
-    # Get the remote repository object
-    remote = repo.remote()
-
-    # Fetch the latest changes from the remote repository
-    remote.fetch()
-
-    # Get the names of the modified files in the local repository
-    local_diff = repo.git.diff("--name-only", "--diff-filter=M", "HEAD").splitlines()
-
-    # Get the names of the modified files in the remote repository
-    remote_diff = repo.git.diff("--name-only", "--diff-filter=M", "{}/HEAD".format(remote.name)).splitlines()
-
-    # Find the difference between the two lists of modified files
-    difference = list(set(local_diff) - set(remote_diff))
-
-    # Print the difference
-    print("Modified files that haven't been pushed to GitHub:")
-    for filename in difference:
-        print(filename)
 
 # Add all files in the current directory to the staging area
 repo.git.add(".")
@@ -35,10 +17,18 @@ repo.git.add(".")
 commit_msg = "Update from Python script"
 repo.git.commit("-m", commit_msg)
 
-# Push the changes to the remote repository with the token secret
+# Push the changes to the remote repository with the access token
 remote_url = repo.remote().url
-remote_url_with_secret = remote_url.replace("://", "://" + token_secret + "@")
-repo.git.push(remote_url_with_secret)
+remote_url_with_token = remote_url.replace("://", "://{}@".format(access_token))
+repo.git.push(remote_url_with_token)
 
-# Compare modified files and print the difference
+# Compare modified files in the local repository against the GitHub repository and print the difference
+def compare_files():
+    remote = repo.remote()
+    remote.fetch()
+    local_diff = repo.git.diff("--name-only", "--diff-filter=M").splitlines()
+    remote_diff = repo.git.diff("--name-only", "--diff-filter=M", "{}/HEAD".format(remote.name)).splitlines()
+    print("Modified files in local repository but not in remote repository:")
+    print(set(local_diff) - set(remote_diff))
+
 compare_files()
