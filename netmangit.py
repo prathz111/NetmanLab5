@@ -40,17 +40,18 @@ def compare_files():
         print("No new files to push to GitHub.")
 
 # Function to push modified files to GitHub
-def push_files():
-    # Get the list of modified files in the local repository
-    modified_files = repo.git.diff("--name-only", "--diff-filter=M", "HEAD").splitlines()
+def push_to_github():
+    # Stage the changes
+    repo.git.add("--all")
 
-    # Push each modified file to the remote repository
-    for file in modified_files:
-        remote_url_with_secret = remote.url.replace("://", "://{}@".format(token_secret))
-        repo.git.push("{} {}".format(remote_url_with_secret, file))
+    # Commit the changes
+    commit_msg = "Update from Python script"
+    repo.git.commit("-m", commit_msg)
 
-    print("All modified files have been pushed to GitHub.")
+    # Push the changes to GitHub
+    remote = repo.remote()
+    remote.push()
 
 # Compare modified files and push them to GitHub if any exist
 compare_files()
-push_files()
+push_to_github()
