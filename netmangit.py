@@ -1,6 +1,8 @@
 import os
 import git
 
+print("llllllllllll")
+
 # Set the access token
 access_token = "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"
 
@@ -12,7 +14,6 @@ repo = git.Repo()
 
 # Add all files in the current directory to the staging area
 repo.git.add(".")
-
 # Commit the changes with a message
 commit_msg = "Update from Python script"
 repo.git.commit("-m", commit_msg)
