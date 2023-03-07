@@ -1,6 +1,3 @@
-"""
-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
-"""
 import git
 
 # Set the token secret
@@ -12,9 +9,13 @@ repo = git.Repo()
 # Add all files in the current directory to the staging area
 repo.git.add(".")
 
-# Commit the changes with a message
-commit_msg = "Update from Python script"
-repo.git.commit("-m", commit_msg)
+# Check if there are any changes to commit
+if repo.is_dirty():
+    # Commit the changes with a message
+    commit_msg = "Update from Python script"
+    repo.git.commit("-m", commit_msg)
+else:
+    print("No changes to commit.")
 
 # Function to compare modified files in local repository with GitHub repository
 def compare_files():
