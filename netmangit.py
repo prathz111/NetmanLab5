@@ -6,6 +6,28 @@ token_secret = "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"
 # Initialize a Git repository object
 repo = git.Repo()
 
+# Function to compare modified files and print the difference
+def compare_files():
+    # Get the remote repository object
+    remote = repo.remote()
+
+    # Fetch the latest changes from the remote repository
+    remote.fetch()
+
+    # Get the names of the modified files in the local repository
+    local_diff = repo.git.diff("--name-only", "--diff-filter=M", "HEAD").splitlines()
+
+    # Get the names of the modified files in the remote repository
+    remote_diff = repo.git.diff("--name-only", "--diff-filter=M", "{}/HEAD".format(remote.name)).splitlines()
+
+    # Find the difference between the two lists of modified files
+    difference = list(set(local_diff) - set(remote_diff))
+
+    # Print the difference
+    print("Modified files that haven't been pushed to GitHub:")
+    for filename in difference:
+        print(filename)
+
 # Add all files in the current directory to the staging area
 repo.git.add(".")
 
@@ -18,42 +40,5 @@ remote_url = repo.remote().url
 remote_url_with_secret = remote_url.replace("://", "://" + token_secret + "@")
 repo.git.push(remote_url_with_secret)
 
-# Function to compare modified files in local repository with GitHub repository
-def compare_files():
-    # Get the list of modified files in the local repository
-    modified_files = repo.git.diff("--name-only", "--diff-filter=M", "HEAD").splitlines()
-
-    # Fetch the remote repository
-    remote = repo.remote()
-    remote.fetch()
-
-    # Get the list of modified files in the remote repository
-    remote_diff = repo.git.diff("--name-only", "--diff-filter=M", "{}/HEAD".format(remote.name)).splitlines()
-
-    # Find the files that are in the local repository but not in the remote repository
-    new_files = list(set(modified_files) - set(remote_diff))
-
-    # Print the difference
-    if new_files:
-        print("The following files have been modified locally and need to be pushed to GitHub:")
-        for file in new_files:
-            print(file)
-    else:
-        print("No new files to push to GitHub.")
-
-# Function to push modified files to GitHub
-def push_to_github():
-    # Stage the changes
-    repo.git.add("--all")
-
-    # Commit the changes
-    commit_msg = "Update from Python script"
-    repo.git.commit("-m", commit_msg)
-
-    # Push the changes to GitHub
-    remote = repo.remote()
-    remote.push()
-
-# Compare modified files and push them to GitHub if any exist
+# Compare modified files and print the difference
 compare_files()
-push_to_github()
