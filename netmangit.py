@@ -2,7 +2,7 @@ import os
 import git
 
 # Set the access token
-access_token = "YOUR_ACCESS_TOKEN_HERE"
+access_token = "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"
 
 # Set the Git askpass helper environment variable to avoid being prompted for a password
 os.environ["GIT_ASKPASS"] = "git_askpass_helper"
